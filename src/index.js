@@ -11,12 +11,12 @@ export function processImages (bulk) {
       imageProcessor.send(bulk);
     
       imageProcessor.on('message', (data) => {
-          const i = data.shift();
-          returns[i] = data;
-          if (returns.filter(Boolean).length === bulk.data.length) {
-              imageProcessor.kill();
-              resolve(returns);
-          }
+        const i = data.shift();
+        returns[i] = data;
+        if (returns.filter(Boolean).length === bulk.data.length) {
+          imageProcessor.kill();
+          resolve(returns);
+        }
       });
     })
 }
