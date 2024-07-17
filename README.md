@@ -8,7 +8,7 @@ This format is used to be efficiently and quickly read by decode.luau in Roblox.
 ## Usage
 
 **Lua example**
-```
+```lua
 local rbximage = require(module)
 
 local url = "https://localhost:6942/image-data" -- this is an example url from the js below
@@ -30,7 +30,7 @@ local image = rbximage(imageContent.width, imageContent.height, imageContent.dat
 ```
 
 **JS example, using fastify (tests/fastify.js)**
-```
+```js
 import Fastify from 'fastify';
 import rbximage from '../src/index.js'; // import rbximage
 
