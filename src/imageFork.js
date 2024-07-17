@@ -1,18 +1,15 @@
 import fs from 'node:fs';
 import zlib from 'node:zlib';
+import path from 'node:path';
 import sharp from 'sharp';
-import path from 'path';
-import axios from 'axios';
+import got from 'got';
 
 async function processImage(id, imgpath, resizeHeight, resizeWidth, compression) {
   try {
     let img;
 
     if (imgpath.startsWith("http")) {
-      img = await axios({
-          url: imgpath,
-          responseType: "arraybuffer",
-      });
+      img = await got.get(imgpath, {responseType: "buffer"});
       img = img.data;
     } else {
       img = fs.readFileSync(path.join(import.meta.dirname, "content", imgpath));
