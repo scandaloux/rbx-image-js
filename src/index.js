@@ -1,4 +1,4 @@
-import { fork } from 'child_process';
+import { fork } from 'node:child_process';
 import path from 'node:path';
 
 const imageFork = path.join(import.meta.dirname, 'imageFork.js');
