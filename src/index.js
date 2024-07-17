@@ -22,6 +22,6 @@ export function processImages (bulk) {
 }
 
 export default async function (images) {
-  const result = await processImages(req.body);
+  const result = await processImages(images);
   return result;
 }
