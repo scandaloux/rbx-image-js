@@ -31,6 +31,8 @@ async function processImage(id, imgpath, resizeHeight, resizeWidth, compression)
 
     let finalData;
 
+    data = [info.width, info.height, ...data];
+
     if (compression == -1) {
       finalData = data.toString("base64");
     } else {
