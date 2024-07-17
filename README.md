@@ -19,9 +19,11 @@ local body = HttpService:JSONEncode({data = {
     resizeHeight = , -- optional resize height
     compression = , -- optional compression level, 9 is most compression, 1 is none, 9 is fine for most things (unless you have a really high quality image, you may want to lower the compression level)
   }
+  -- more than 1 image can be defined
 })
 local response = HttpService:PostAsync(url, body)
 
+-- the response contains an array in the order of the body, in this case, we will access the first index since that's what we have supplied in body
 local imageStatus, imageContent = unpack(response[1])
 local image = rbximage(imageContent.width, imageContent.height, imageContent.data)
 -- 1d array of RGBA values, each RGBA being one pixel, and values being from 0 - 1
