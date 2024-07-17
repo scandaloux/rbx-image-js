@@ -10,7 +10,7 @@ async function processImage(id, imgpath, resizeHeight, resizeWidth, compression)
 
     if (imgpath.startsWith("http")) {
       img = await got.get(imgpath, {responseType: "buffer"});
-      img = img.data;
+      img = img.body;
     } else {
       img = fs.readFileSync(path.join(import.meta.dirname, "content", imgpath));
     }
@@ -27,8 +27,6 @@ async function processImage(id, imgpath, resizeHeight, resizeWidth, compression)
     let {data, info} = await img.removeAlpha().raw().toBuffer({ resolveWithObject: true });
 
     let finalData;
-
-    data = [info.width, info.height, ...data];
 
     if (compression == -1) {
       finalData = data.toString("base64");
@@ -53,7 +51,7 @@ process.on('message', async (message) => {
     const query = message.data[i];
     const { path, resizeHeight, resizeWidth, compression } = query;
     if (!path) {
-        return process.send([id, 400, "Missing 'path' parameter."]);
+        return process.send([i, 400, "Missing 'path' parameter."]);
     }
     
     processImage(i, path, resizeHeight, resizeWidth, compression);
